@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Club Members</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <style>
+        body {
+            margin: 30px;
+            font-family: Arial;
+        }
+
+        input {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 8px;
+            background-color: #e6efff;
+            border: none;
+        }
+
+        button {
+            background-color: rgb(69, 69, 153);
+            color: white;
+            padding: 8px;
+            border: none;
+        }
+
+        #results {
+            background-color: rgb(20, 130, 220);
+            color: yellow;
+            padding: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Add new club member:</h3>
+
+    <input type="text" id="first" placeholder="First name">
+    <input type="text" id="last" placeholder="Last name">
+
+    <button py-click="add_member">Submit</button>
+
+    <div id="results"></div>
+
+    <script type="py">
+        from js import document
+
+        
+        grade7 = {"Pearl Sumbillo", "Caela Regulacion", "Aphia Batican", "Soap"}
+        grade8 = {"Dezzarae Almirol", "Harley Malonso", "Cheska Torres", "Gabriel Ferrer"}
+        grade9 = {"Kean Lardizabal", "Nastasia Tanglao", "Aubrey Cabrera", "Bella Canlas"}
+        grade10 = {"Megan Tan", "Mica Frigilana", "Alysha aguilar", "Lucas Tanglao", "Raji Santos"}
+
+        new_members = set()
+
+      
+        def update_display():
+            all_members = grade7 | grade8 | grade9 | grade10 | new_members
+
+            members_list = "<br>".join(all_members)
+
+            document.getElementById("results").innerHTML = f"""
+                All members:<br>
+                {members_list}<br>
+                Total members: {len(all_members)}
+            """
+
+        def add_member(event):
+            first = document.getElementById("first").value
+            last = document.getElementById("last").value
+
+            new_members.add(f"{first} {last}")
+
+            update_display()
+
+        
+        update_display()
+    </script>
+
+</body>
+</html>
